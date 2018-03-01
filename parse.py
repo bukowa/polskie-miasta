@@ -51,7 +51,6 @@ def _parse_city(d: dict):
 
 
 if __name__ == '__main__':
-    _suggest = list()
     _output = list()
 
     region_cities_list = [parse_region(r) for r in get_all_regions()]
