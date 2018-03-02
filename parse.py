@@ -35,14 +35,13 @@ def parse_region(t: Tag) -> dict:
         Cities=[{'name': l.span.text, 'link': l['href']} for l in links])
 
 
-def get_city_id(u: str):
+def _get_city_id(u: str) -> str:
     r = _url_soup(u)
-    n = r.find('input', {'name': 'search[city_id]'})['value']
-    return n
+    return r.find('input', {'name': 'search[city_id]'})['value']
 
 
-def _parse_city(d: dict):
-    city_id = get_city_id(d['link'])
+def parse_city(d: dict) -> dict:
+    city_id = _get_city_id(d['link'])
     suggest = _post_suggest(d['name'])
     print(suggest)
     for s in suggest:
@@ -57,7 +56,7 @@ if __name__ == '__main__':
     for r in region_cities_list:
         app = dict(region_name=r['Region'], cities=[])
         for city in r['Cities']:
-            app['cities'].append(_parse_city(city))
+            app['cities'].append(parse_city(city))
         _output.append(app)
 
     import json
