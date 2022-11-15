@@ -1,0 +1,5 @@
+# python 3.10
+beautifulsoup4 >= 4.11.1
+lxml >= 4.9.1
+simplejson >= 3.18.0
+requests >= 2.28.1
