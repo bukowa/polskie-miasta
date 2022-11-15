@@ -23,12 +23,14 @@ def _post_suggest(s: str) -> dict:
 
 def get_all_regions() -> ResultSet:
     p = _url_soup(_url_regions)
-    return p.find_all('div', class_='clr marginbott20')
+    d = p.find_all('div', class_='clr marginbott20')
+    return d
 
 
 def parse_region(t: Tag) -> dict:
-    p = _url_soup(t.a['href'])
-    h2 = p.find('div', class_='clr marginbott10')
+    href = t.a['href']  # https://www.olx.pl/dolnoslaskie/sitemap/regions/
+    p = _url_soup(href)
+    h2 = p.find('div', class_='site-map-regions')
     links = h2.find_all('a', class_='tdnone')
     return dict(
         Region=p.find('h2').span.text,
